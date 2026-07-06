@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { services, siteConfig } from "@/lib/site-config";
+import {
+  buildContactEmailHtml,
+  buildContactEmailText,
+} from "@/lib/contact-email";
+import { services } from "@/lib/site-config";
 
 type ContactPayload = {
   name?: string;
@@ -78,18 +82,16 @@ export async function POST(request: Request) {
   }
 
   const serviceLabel = service ? getServiceLabel(service) : "Nicht angegeben";
+  const submittedAt = new Date();
 
-  const text = [
-    `Neue Kontaktanfrage über ${siteConfig.url}`,
-    "",
-    `Name: ${name}`,
-    `Telefon: ${phone}`,
-    `E-Mail: ${email}`,
-    `Leistung: ${serviceLabel}`,
-    "",
-    "Nachricht:",
+  const emailData = {
+    name,
+    phone,
+    email,
+    serviceLabel,
     message,
-  ].join("\n");
+    submittedAt,
+  };
 
   const resend = new Resend(apiKey);
 
@@ -97,8 +99,9 @@ export async function POST(request: Request) {
     from: fromEmail,
     to: [toEmail],
     replyTo: email,
-    subject: `Anfrage von ${name}`,
-    text,
+    subject: `Neue Anfrage: ${name} – ${serviceLabel}`,
+    text: buildContactEmailText(emailData),
+    html: buildContactEmailHtml(emailData),
   });
 
   if (error) {
