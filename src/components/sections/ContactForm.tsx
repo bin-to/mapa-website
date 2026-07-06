@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -27,7 +28,10 @@ const fieldClassName =
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleChange(
     event: React.ChangeEvent<
@@ -36,33 +40,48 @@ export function ContactForm() {
   ) {
     const { name, value } = event.target;
     setFormData((current) => ({ ...current, [name]: value }));
+    setError(null);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const serviceLabel =
-      formData.service === "sonstiges"
-        ? "Sonstiges / Beratung"
-        : (services.find((service) => service.id === formData.service)?.title ??
-          "Nicht angegeben");
+    if (!privacyAccepted) {
+      setError("Bitte akzeptieren Sie die Datenschutzerklärung.");
+      return;
+    }
 
-    const body = [
-      `Name: ${formData.name}`,
-      `Telefon: ${formData.phone}`,
-      `E-Mail: ${formData.email}`,
-      `Leistung: ${serviceLabel}`,
-      "",
-      "Nachricht:",
-      formData.message,
-    ].join("\n");
+    setIsSubmitting(true);
+    setError(null);
 
-    const mailto = `${siteConfig.emailHref}?subject=${encodeURIComponent(
-      `Anfrage von ${formData.name}`,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          privacyAccepted,
+        }),
+      });
 
-    window.location.href = mailto;
-    setSubmitted(true);
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setError(
+          result.error ??
+            "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+        );
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError(
+        "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -72,8 +91,8 @@ export function ContactForm() {
           Vielen Dank für Ihre Anfrage
         </h3>
         <p className="mt-4 text-sm leading-relaxed text-silver-500 sm:text-base">
-          Ihr E-Mail-Programm sollte sich geöffnet haben. Senden Sie die
-          Nachricht ab – wir melden uns schnellstmöglich bei Ihnen.
+          Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns
+          schnellstmöglich bei Ihnen.
         </p>
         <p className="mt-4 text-sm text-silver-500">
           Lieber direkt sprechen?{" "}
@@ -91,7 +110,9 @@ export function ContactForm() {
           className="mt-8"
           onClick={() => {
             setFormData(initialFormData);
+            setPrivacyAccepted(false);
             setSubmitted(false);
+            setError(null);
           }}
         >
           Neue Anfrage
@@ -203,14 +224,49 @@ export function ContactForm() {
         </div>
       </div>
 
-      <p className="mt-5 text-xs leading-relaxed text-silver-400">
-        Mit dem Absenden öffnet sich Ihr E-Mail-Programm. Ihre Angaben werden
-        nur zur Bearbeitung Ihrer Anfrage verwendet.
-      </p>
+      <div className="mt-5">
+        <label className="flex items-start gap-3 text-sm leading-relaxed text-silver-500">
+          <input
+            type="checkbox"
+            name="privacyAccepted"
+            checked={privacyAccepted}
+            onChange={(event) => {
+              setPrivacyAccepted(event.target.checked);
+              setError(null);
+            }}
+            required
+            className="mt-0.5 h-4 w-4 shrink-0 rounded border-silver-300 text-navy-800 focus:ring-navy-800/20"
+          />
+          <span>
+            Ich habe die{" "}
+            <Link
+              href="/datenschutz"
+              className="font-medium text-navy-800 underline-offset-2 transition-colors hover:text-navy-600 hover:underline"
+              target="_blank"
+            >
+              Datenschutzerklärung
+            </Link>{" "}
+            gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung
+            meiner Anfrage zu. <span className="text-navy-600">*</span>
+          </span>
+        </label>
+      </div>
 
-      <Button type="submit" variant="secondary" size="lg" className="mt-6 w-full sm:w-auto">
+      {error ? (
+        <p className="mt-4 text-sm text-red-600" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      <Button
+        type="submit"
+        variant="secondary"
+        size="lg"
+        className="mt-6 w-full sm:w-auto"
+        disabled={isSubmitting || !privacyAccepted}
+      >
         <Send className="h-4 w-4" aria-hidden />
-        Anfrage absenden
+        {isSubmitting ? "Wird gesendet …" : "Anfrage absenden"}
       </Button>
     </form>
   );
