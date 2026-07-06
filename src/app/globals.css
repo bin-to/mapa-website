@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --color-navy-950: #060b14;
+  --color-navy-900: #0a1628;
+  --color-navy-800: #0f1f3d;
+  --color-navy-700: #152a4a;
+  --color-navy-600: #1e3a66;
+  --color-navy-500: #2a5089;
+  --color-silver-50: #f8f9fb;
+  --color-silver-100: #f0f2f5;
+  --color-silver-200: #e2e6ec;
+  --color-silver-300: #c4cad4;
+  --color-silver-400: #8f99a8;
+  --color-silver-500: #6b7585;
+  --background: #ffffff;
+  --foreground: var(--color-navy-900);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-600: var(--color-navy-600);
+  --color-navy-500: var(--color-navy-500);
+  --color-silver-50: var(--color-silver-50);
+  --color-silver-100: var(--color-silver-100);
+  --color-silver-200: var(--color-silver-200);
+  --color-silver-300: var(--color-silver-300);
+  --color-silver-400: var(--color-silver-400);
+  --color-silver-500: var(--color-silver-500);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-outfit);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-navy-800) 20%, white);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
