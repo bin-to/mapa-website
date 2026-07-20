@@ -62,7 +62,7 @@ export function buildContactEmailHtml(data: ContactEmailData): string {
               <td style="padding-bottom:24px;" align="center">
                 <table role="presentation" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:4px;box-shadow:0 8px 24px rgba(10,22,40,0.08);border:1px solid rgba(0,0,0,0.05);">
                   <tr>
-                    <td style="padding:12px 16px 8px;" align="center">
+                    <td style="padding:4px 16px;" align="center">
                       <img
                         src="${logoUrl}"
                         alt="${escapeHtml(siteConfig.name)}"
@@ -70,11 +70,6 @@ export function buildContactEmailHtml(data: ContactEmailData): string {
                         height="110"
                         style="display:block;width:220px;max-width:100%;height:auto;border:0;"
                       />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding:0 16px 12px;font-size:10px;letter-spacing:0.32em;text-transform:uppercase;text-align:center;color:#0f1f3d;font-weight:300;">
-                      In Profession
                     </td>
                   </tr>
                 </table>

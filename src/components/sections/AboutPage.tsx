@@ -61,9 +61,6 @@ export function AboutPage() {
                   priority
                   className="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
                 />
-                <p className="mt-4 font-sans text-sm font-light uppercase tracking-[0.35em] text-navy-800 sm:text-base">
-                  {siteConfig.tagline}
-                </p>
               </div>
 
               <h1 className="mt-10 font-display text-3xl font-semibold tracking-tight text-navy-900 sm:text-4xl lg:text-5xl">
@@ -100,13 +97,13 @@ export function AboutPage() {
             <ScrollReveal delay={1}>
               <SectionHeading
                 title="Wer wir sind"
-                subtitle={`${siteConfig.shortName} ist Ihr Partner für Sanierung, Abdichtung, Innenausbau und Außenanlagen in Rudersberg und Umgebung.`}
+                subtitle={`${siteConfig.shortName} ist Ihr Partner für Sanierung, Flachdach Sanierung, Innenausbau und Außenanlagen in Rudersberg und Umgebung.`}
               />
               <div className="mt-8 space-y-5 text-base leading-relaxed text-silver-500 sm:text-lg">
                 <p>
                   Hinter {siteConfig.shortName} steht {siteConfig.owner} – ein
                   Handwerksbetrieb, der Wert auf saubere Arbeit, ehrliche Beratung
-                  und verlässliche Termine legt. Ob Altbausanierung, Flachdach,
+                  und verlässliche Termine legt. Ob Altbausanierung, Flachdach Sanierung,
                   Putz &amp; Maler oder Gartengestaltung: Wir nehmen uns Zeit für
                   Ihr Anliegen und entwickeln Lösungen, die zu Ihrer Immobilie
                   passen.

@@ -6,37 +6,21 @@ import { images } from "@/lib/images";
 
 type LogoProps = {
   size?: "sm" | "md" | "lg";
-  showTagline?: boolean;
   priority?: boolean;
   className?: string;
 };
 
-const sizes = {
-  sm: {
-    image: "h-11 sm:h-12",
-    tagline:
-      "px-2 pb-2 pt-1.5 text-[0.55rem] tracking-[0.3em] sm:text-[0.6rem]",
-  },
-  md: {
-    image: "h-14 sm:h-16",
-    tagline:
-      "px-2 pb-2 pt-1.5 sm:px-2.5 text-[0.6rem] tracking-[0.32em] sm:text-xs",
-  },
-  lg: {
-    image: "h-16 sm:h-20 lg:h-24",
-    tagline:
-      "px-2.5 pb-2.5 pt-2 sm:px-3 text-xs tracking-[0.35em] sm:text-sm",
-  },
-};
+const imageSizes = {
+  sm: "h-11 sm:h-12",
+  md: "h-14 sm:h-16",
+  lg: "h-16 sm:h-20 lg:h-24",
+} as const;
 
 export function Logo({
   size = "md",
-  showTagline = true,
   priority = false,
   className,
 }: LogoProps) {
-  const config = sizes[size];
-
   return (
     <Link
       href="/"
@@ -45,7 +29,7 @@ export function Logo({
     >
       <span
         className={cn(
-          "inline-flex w-fit flex-col overflow-hidden rounded-sm bg-white shadow-md shadow-black/15 ring-1 ring-black/5 transition-shadow duration-300 group-hover:shadow-lg group-hover:shadow-black/20",
+          "inline-flex w-fit overflow-hidden rounded-sm bg-white px-2.5 py-0 shadow-md shadow-black/15 ring-1 ring-black/5 transition-shadow duration-300 group-hover:shadow-lg group-hover:shadow-black/20 sm:px-3",
         )}
       >
         <Image
@@ -56,19 +40,9 @@ export function Logo({
           priority={priority}
           className={cn(
             "block w-auto object-contain transition-opacity duration-300 group-hover:opacity-90",
-            config.image,
+            imageSizes[size],
           )}
         />
-        {showTagline && (
-          <span
-            className={cn(
-              "text-center font-sans font-light uppercase text-navy-800",
-              config.tagline,
-            )}
-          >
-            In Profession
-          </span>
-        )}
       </span>
     </Link>
   );

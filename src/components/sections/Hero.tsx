@@ -31,7 +31,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-silver-200 sm:text-lg lg:text-xl">
-            Hochwertige Handwerksleistungen für Sanierung, Abdichtung, Innenausbau
+            Hochwertige Handwerksleistungen für Sanierung, Flachdach Sanierung, Innenausbau
             und Außenanlagen – fachgerecht umgesetzt in Rudersberg und Umgebung.
           </p>
 

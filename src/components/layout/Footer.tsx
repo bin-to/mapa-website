@@ -12,7 +12,7 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo size="lg" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-silver-400">
-            Hochwertige Handwerksleistungen für Sanierung, Abdichtung, Innenausbau
+            Hochwertige Handwerksleistungen für Sanierung, Flachdach Sanierung, Innenausbau
             und Außenanlagen – persönlich, termintreu und regional in Rudersberg.
           </p>
         </div>

@@ -35,7 +35,7 @@ export const impressumSections: LegalSection[] = [
     id: "beruf",
     title: "Berufsbezeichnung",
     paragraphs: [
-      "Handwerksbetrieb für Sanierung, Abdichtung, Innenausbau und Außenanlagen.",
+      "Handwerksbetrieb für Sanierung, Flachdach Sanierung, Innenausbau und Außenanlagen.",
       "Verliehen in der Bundesrepublik Deutschland.",
     ],
   },

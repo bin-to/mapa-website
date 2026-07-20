@@ -73,7 +73,7 @@ export function ContactPage() {
               Lassen Sie uns sprechen
             </h1>
             <p className="mt-4 text-base leading-relaxed text-silver-200 sm:text-lg">
-              Ob Altbausanierung, Flachdach, Putz &amp; Maler oder
+              Ob Altbausanierung, Flachdach Sanierung, Putz &amp; Maler oder
               Gartengestaltung – wir beraten Sie persönlich und unverbindlich in
               Rudersberg und Umgebung.
             </p>

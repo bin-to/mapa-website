@@ -8,7 +8,7 @@ export const siteConfig = {
 
   description:
 
-    "Hochwertige Handwerksleistungen für Sanierung, Abdichtung, Innenausbau und Außenanlagen – fachgerecht umgesetzt in Rudersberg und Umgebung.",
+    "Hochwertige Handwerksleistungen für Sanierung, Flachdach Sanierung, Innenausbau und Außenanlagen – fachgerecht umgesetzt in Rudersberg und Umgebung.",
 
   url: "https://www.mapa-bau.de",
 
@@ -58,15 +58,15 @@ export const services = [
 
   {
 
-    id: "flachdachabdichtung",
+    id: "flachdach-sanierung",
 
-    title: "Flachdachabdichtung",
+    title: "Flachdach Sanierung",
 
-    href: "/leistungen/flachdachabdichtung",
+    href: "/leistungen/flachdach-sanierung",
 
     description:
 
-      "Zuverlässiger Schutz vor Witterung und Feuchtigkeit – langlebig, sauber und fachgerecht umgesetzt.",
+      "Sanierung und Instandsetzung von Flachdächern – von punktuellen Reparaturen bis zur Erneuerung der Abdichtung, fachgerecht und dauerhaft.",
 
     icon: "shield",
 
@@ -114,11 +114,7 @@ export const navLinks = [
 
     label:
 
-      service.id === "flachdachabdichtung"
-
-        ? "Flachdach"
-
-        : service.id === "putz-malerarbeiten"
+      service.id === "putz-malerarbeiten"
 
           ? "Putz & Maler"
 

@@ -39,7 +39,7 @@ export const images = {
 
     src: "/images/leistungen/flachdachabdichtung-dach.webp",
 
-    alt: "Professionell abgedichtetes Flachdach mit Bitumenbahnen",
+    alt: "Flachdach Sanierung mit Bitumenbahnen",
 
   },
 
@@ -47,7 +47,7 @@ export const images = {
 
     src: "/images/leistungen/flachdachabdichtung-fluessig.webp",
 
-    alt: "Flüssigabdichtung auf einem Flachdach mit Walze",
+    alt: "Flüssigabdichtung im Rahmen einer Flachdach Sanierung",
 
   },
 

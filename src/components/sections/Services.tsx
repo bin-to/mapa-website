@@ -15,7 +15,7 @@ import { images } from "@/lib/images";
 
 const serviceImages = {
   altbausanierung: images.altbausanierung,
-  flachdachabdichtung: images.flachdachabdichtung,
+  "flachdach-sanierung": images.flachdachabdichtung,
   "putz-malerarbeiten": images.putzMalerPutz,
   gartengestaltung: images.gartengestaltung,
 } as const;
