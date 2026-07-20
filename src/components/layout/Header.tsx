@@ -27,10 +27,23 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
   return (
@@ -44,7 +57,7 @@ export function Header() {
           : "bg-transparent py-5 lg:py-6",
       )}
     >
-      <Container className="flex items-center justify-between gap-6">
+      <Container className="relative z-50 flex items-center justify-between gap-6">
         <Logo size="md" priority />
 
         <nav
@@ -77,9 +90,9 @@ export function Header() {
           type="button"
           className={cn(
             "inline-flex items-center justify-center rounded-sm p-2 transition-colors lg:hidden",
-            showSolid && isLightHero
-              ? "text-navy-900 hover:bg-navy-900/5"
-              : "text-white hover:bg-white/10",
+            menuOpen || !(showSolid && isLightHero)
+              ? "text-white hover:bg-white/10"
+              : "text-navy-900 hover:bg-navy-900/5",
           )}
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
@@ -115,7 +128,13 @@ export function Header() {
           </nav>
 
           <div className="mt-10 flex flex-col gap-4">
-            <Button href="/kontakt" variant="primary" size="lg" className="w-full">
+            <Button
+              href="/kontakt"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              onClick={() => setMenuOpen(false)}
+            >
               Kostenlos anfragen
             </Button>
             <a
